@@ -98,7 +98,6 @@ fn gather_args(prev_args: Option<&Args>) -> Args {
 
     let dry_run = prompt_with_retry("Debug mode? (y/N)", "N", parse_confirmation);
 
-    // Static mode preview
     if mode == LightingMode::Static {
         preview_static_mode(zones.clone(), red, green, blue);
     }

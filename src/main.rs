@@ -10,7 +10,7 @@ use color_eyre::eyre::{eyre, Result, WrapErr};
 
 use serde::{Deserialize, Serialize};
 use std::fs::{File, OpenOptions};
-use std::io::{/* self, */ Write};
+use std::io::Write;
 use std::path::PathBuf;
 use std::str::FromStr;
 
@@ -61,6 +61,8 @@ impl FromStr for Direction {
         match s.to_lowercase().as_str() {
             "right-to-left" => Ok(Direction::RightToLeft),
             "left-to-right" => Ok(Direction::LeftToRight),
+            "rl" => Ok(Direction::RightToLeft),
+            "lr" => Ok(Direction::LeftToRight),
             _ => Err(format!("'{}' is not a valid direction", s)),
         }
     }
@@ -405,7 +407,7 @@ fn main() -> Result<()> {
     color_eyre::install()?;
     let mut args = Args::parse();
 
-    if args.interactive {args = interactive_mode();}
+    if args.interactive { args = interactive_mode();}
 
     let (mut red, mut green, mut blue) = (args.red, args.green, args.blue);
 
